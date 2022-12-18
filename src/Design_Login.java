@@ -5,8 +5,6 @@ import java.sql.*;
 import javax.swing.*;
 
 
-
-
 public class Design_Login{
 
 //DB Connection Part
