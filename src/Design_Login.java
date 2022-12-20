@@ -22,7 +22,9 @@ public class Design_Login{
             int w = 1000;
             frame = new JFrame();
             frame.setSize(w,h);
-            ImageIcon img = new ImageIcon("LoginBack.png");
+            Image icon = Toolkit.getDefaultToolkit().getImage("sources/icon.png");
+            frame.setIconImage(icon);
+            ImageIcon img = new ImageIcon("sources/LoginBack.png");
             picLabel = new JLabel("",img,JLabel.CENTER);
             picLabel.setBounds(0,0,w,h);
             usr  =new JTextField();
@@ -32,7 +34,7 @@ public class Design_Login{
             pass  = new JPasswordField();
             pass.setBackground(new Color(230,233,237));
             pass.setBounds(500,441, 300,40);
-            frame.add(usr);
+            picLabel.add(usr);
             picLabel.add(pass);
             JButton loginbtn = new JButton("LogIn");
             loginbtn.setFont(new Font(Font.SANS_SERIF,Font.BOLD,20));
@@ -60,11 +62,19 @@ public class Design_Login{
                         System.out.println(ex);
                     }
 
-
                  pass.setText("");
                 }
             });
             picLabel.add(loginbtn);
+            JButton sgnup = new JButton("SignUp");
+            sgnup.setFont(new Font(Font.SANS_SERIF,Font.BOLD,14));
+            sgnup.setBackground(new Color(230,233,237));
+            sgnup.setBounds(880,727,100,30);
+
+
+
+
+            picLabel.add(sgnup);
             frame.add(picLabel);
             //W
             frame.setResizable(false);
