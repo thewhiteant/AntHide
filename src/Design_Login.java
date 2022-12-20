@@ -3,8 +3,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 import javax.swing.*;
-
-
 public class Design_Login{
 
 //DB Connection Part
@@ -22,6 +20,7 @@ public class Design_Login{
             int w = 1000;
             frame = new JFrame();
             frame.setSize(w,h);
+            frame.setTitle("AntHide Login");
             Image icon = Toolkit.getDefaultToolkit().getImage("sources/icon.png");
             frame.setIconImage(icon);
             ImageIcon img = new ImageIcon("sources/LoginBack.png");
@@ -66,14 +65,10 @@ public class Design_Login{
                 }
             });
             picLabel.add(loginbtn);
-            JButton sgnup = new JButton("SignUp");
+            JButton sgnup = new JButton("Create an account");
             sgnup.setFont(new Font(Font.SANS_SERIF,Font.BOLD,14));
             sgnup.setBackground(new Color(230,233,237));
-            sgnup.setBounds(880,727,100,30);
-
-
-
-
+            sgnup.setBounds(280,620,200,40);
             picLabel.add(sgnup);
             frame.add(picLabel);
             //W
