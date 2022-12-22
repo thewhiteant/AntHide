@@ -5,19 +5,16 @@ import java.sql.*;
 import javax.swing.*;
 public class Design_Login{
 
-//DB Connection Part
 
-//Probel_face: Connection Problem For Connector;
 //TODO: Download mysqlconnector and place to module
     Connection c;
     private JFrame frame;
     private JLabel picLabel;
     private  JTextField usr;
     private  JPasswordField pass;
-
         void Design()  {
-            int h = 800;
-            int w = 1000;
+            int h = 600;
+            int w = 800;
             frame = new JFrame();
             frame.setSize(w,h);
             frame.setTitle("AntHide Login");
@@ -27,17 +24,16 @@ public class Design_Login{
             picLabel = new JLabel("",img,JLabel.CENTER);
             picLabel.setBounds(0,0,w,h);
             usr  =new JTextField();
-            usr.setBounds(500,360, 300,40);
+            usr.setBounds(400,270, 200, 30);
             usr.setBackground(new Color(230,233,237));
             usr.setFont(new Font(Font.SERIF,Font.BOLD,18));
             pass  = new JPasswordField();
             pass.setBackground(new Color(230,233,237));
-            pass.setBounds(500,441, 300,40);
+            pass.setBounds(400,330, 200,30);
             picLabel.add(usr);
             picLabel.add(pass);
             JButton loginbtn = new JButton("LogIn");
-            loginbtn.setFont(new Font(Font.SANS_SERIF,Font.BOLD,20));
-            loginbtn.setBounds(280,560,200,40);
+            loginbtn.setBounds(220,400,170,30);
             loginbtn.setBackground(new Color(230,233,237));
             loginbtn.addActionListener(new ActionListener() {
                 @Override
@@ -66,15 +62,25 @@ public class Design_Login{
             });
             picLabel.add(loginbtn);
             JButton sgnup = new JButton("Create an account");
-            sgnup.setFont(new Font(Font.SANS_SERIF,Font.BOLD,14));
             sgnup.setBackground(new Color(230,233,237));
-            sgnup.setBounds(280,620,200,40);
+            sgnup.setBounds(220,440,170,30);
+            sgnup.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    frame.dispose();
+                    new Design_signup().Design();
+                }
+            });
+
+
             picLabel.add(sgnup);
             frame.add(picLabel);
-            //W
             frame.setResizable(false);
             frame.setLayout(null);
             frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             frame.setVisible(true);
         }
+
 }
+
+
