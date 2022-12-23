@@ -1,3 +1,5 @@
+import com.mysql.jdbc.CommunicationsException;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,7 +10,6 @@ public class Design_signup{
 
     Connection c;
     private JFrame frame;
-    private JLabel picLabel;
     private  JTextField usr;
     private  JPasswordField pass;
     void Design()  {
@@ -20,9 +21,9 @@ public class Design_signup{
         Image icon = Toolkit.getDefaultToolkit().getImage("sources/icon.png");
         frame.setIconImage(icon);
         ImageIcon img = new ImageIcon("sources/LoginBack.png");
-        picLabel = new JLabel("",img,JLabel.CENTER);
+        JLabel picLabel = new JLabel("", img, JLabel.CENTER);
         picLabel.setBounds(0,0,w,h);
-        usr  =new JTextField();
+        usr  = new JTextField();
         usr.setBounds(400,270, 200, 30);
         usr.setBackground(new Color(230,233,237));
         usr.setFont(new Font(Font.SERIF,Font.BOLD,18));
@@ -42,12 +43,23 @@ public class Design_signup{
                 try {
                     Class.forName("com.mysql.jdbc.Driver");
                     c = DriverManager.getConnection("jdbc:mysql://localhost/anthide","root", "");
+                    String quary = "SELECT * FROM logins WHERE username = '"+Username+"'";
+                    Statement st = c.createStatement();
+                    ResultSet rs = st.executeQuery(quary);
 
-                    PreparedStatement stmt = c.prepareStatement("INSERT INTO logins (id, username, password) VALUES (NULL,'"+Username+"','"+Password+"')");
-                    stmt.executeUpdate();
+                    if(rs.next()){
+                        JOptionPane.showMessageDialog(frame," Username Already taken!!");
+                    }else {
 
+                        PreparedStatement stmt = c.prepareStatement("INSERT INTO logins (id, username, password,fb,ins,mail,twt,lnk1,lnk2) VALUES (NULL,'" + Username + "','" + Password + "','','','','','','')");
+                        stmt.executeUpdate();
+                        JOptionPane.showMessageDialog(frame, "Succesfully SignUp");
+                    }
 
-                } catch (Exception ex){
+                } catch (CommunicationsException ex){
+                    System.out.println("oooo mere bhai db chaira lo to");
+                }
+                catch (Exception ex){
                     System.out.println(ex);
                 }
 //

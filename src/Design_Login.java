@@ -1,3 +1,5 @@
+import com.mysql.jdbc.CommunicationsException;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,6 +9,7 @@ public class Design_Login{
 
 
 //TODO: Download mysqlconnector and place to module
+    String user = "";
     Connection c;
     private JFrame frame;
     private JLabel picLabel;
@@ -46,15 +49,21 @@ public class Design_Login{
                         String quary = "SELECT * FROM logins WHERE username = '"+Username+"' and password = '"+Password+"'";
                         Statement st = c.createStatement();
                         ResultSet rs = st.executeQuery(quary);
+
                         if(rs.next()){
-                            JOptionPane.showMessageDialog(frame,"Welcome sir");
+                            frame.dispose();
+                            user = Username;
+                            new Design_Main().Design(user);
                         }
                         else {
                             JOptionPane.showMessageDialog(frame,"Wrong Credential");
                         }
 
-                    } catch (Exception ex){
-                        System.out.println(ex);
+                    } catch (CommunicationsException ex){
+                        System.out.println("oooo mere bhai db chaira lo to");
+                    }
+                    catch (Exception exx){
+                        System.out.println(exx);
                     }
 
                  pass.setText("");
