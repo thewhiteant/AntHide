@@ -37,7 +37,7 @@ public class Editor_Window {
                     try {
                        Class.forName("com.mysql.jdbc.Driver");
                        Connection c = DriverManager.getConnection("jdbc:mysql://localhost/anthide","root", "");
-                       PreparedStatement stmt = c.prepareStatement("UPDATE logins SET "+data+" = '"+ passwordforCng +"' WHERE logins . username = '" + usrername + "'");
+                       PreparedStatement stmt = c.prepareStatement("UPDATE logins SET "+data+" = MD5('"+ passwordforCng +"') WHERE logins . username = '" + usrername + "'");
                        stmt.executeUpdate();
 
 

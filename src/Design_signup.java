@@ -51,10 +51,11 @@ public class Design_signup{
                         JOptionPane.showMessageDialog(frame," Username Already taken!!");
                     }else {
 
-                        PreparedStatement stmt = c.prepareStatement("INSERT INTO logins (id, username, password,fb,ins,mail,twt,lnk1,lnk2) VALUES (NULL,'" + Username + "','" + Password + "','','','','','','')");
+                        PreparedStatement stmt = c.prepareStatement("INSERT INTO logins (id, username, password,fb,ins,mail,twt,lnk1,lnk2) VALUES (NULL,'" + Username + "',MD5('" + Password + "'),'','','','','','')");
                         stmt.executeUpdate();
                         JOptionPane.showMessageDialog(frame, "Succesfully SignUp");
                     }
+
 
                 } catch (CommunicationsException ex){
                     System.out.println("oooo mere bhai db chaira lo to");

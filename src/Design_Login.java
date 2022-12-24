@@ -46,7 +46,7 @@ public class Design_Login{
                     try {
                         Class.forName("com.mysql.jdbc.Driver");
                         c = DriverManager.getConnection("jdbc:mysql://localhost/anthide","root", "");
-                        String quary = "SELECT * FROM logins WHERE username = '"+Username+"' and password = '"+Password+"'";
+                        String quary = "SELECT * FROM logins WHERE username = '"+Username+"' and password = MD5('"+Password+"')";
                         Statement st = c.createStatement();
                         ResultSet rs = st.executeQuery(quary);
 

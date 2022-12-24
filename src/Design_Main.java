@@ -68,7 +68,7 @@ public  class Design_Main {
 
         JButton logiout = new JButton("LOGOUT");
 //        logiout.setEnabled(false
-        logiout.setBounds(670,25,100,20);
+        logiout.setBounds(670,40,100,20);
         logiout.setBackground(new Color(230,233,237));
         logiout.addActionListener(new ActionListener() {
             @Override
@@ -79,7 +79,6 @@ public  class Design_Main {
         });
 
         picLabel.add(logiout);
-
 
 
 //        Panel Section
