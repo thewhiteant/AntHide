@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Random;
 
 
 public  class Design_Main {
@@ -22,17 +23,32 @@ public  class Design_Main {
     private  JPasswordField pass;
     private String fbook = "" ,instra = "",mails = "" ,twet = "",link1 = "",link2 = "";
 
+
+    String DeepEncrpt(String key){
+        if(key.isEmpty()) return  "";
+        Functionalities Fn = new Functionalities();
+        Random rand = new Random();
+        int randomNum = rand.nextInt((10 - 1) + 1) + 1;
+
+        for (int i = 0;i<randomNum;i++){
+            key = Fn.en(key);
+        }
+        return  key;
+    }
+
     void Design(String uname) {
+        Functionalities Fn = new Functionalities();
+
 
         //Data Load
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection c = DriverManager.getConnection("jdbc:mysql://localhost/anthide","root", "");
-            String quary = "SELECT * FROM logins WHERE username = '"+uname+"'";
+            String quary = "SELECT * FROM logins WHERE username = '"+ Fn.en(uname)+"'";
             Statement st = c.createStatement();
             ResultSet rs = st.executeQuery(quary);
             while (rs.next()){
-                fbook = rs.getString("fb");
+                fbook = rs.getString("fb"); //Encrypted ones
                 instra = rs.getString("ins");
                 mails = rs.getString("mail");
                 twet = rs.getString("twt");
@@ -59,6 +75,9 @@ public  class Design_Main {
         ImageIcon img = new ImageIcon("sources/MainBG.png");
         JLabel picLabel = new JLabel(img);
         picLabel.setBounds(0, -20, w, h);
+
+
+
         JLabel unam = new JLabel(uname);
         unam.setBounds(570,-67,200,200);
         unam.setFont(new Font(Font.MONOSPACED,Font.BOLD,18));
@@ -85,7 +104,7 @@ public  class Design_Main {
            JTextField l1,l2,l3,l4,l5,l6;
 
 
-            l1 = new JTextField(fbook);
+            l1 = new JTextField(DeepEncrpt(fbook));
             l1.setBounds(170,116,370,40);
             l1.setBorder(BorderFactory.createCompoundBorder(l1.getBorder(),BorderFactory.createEmptyBorder(5,15, 5, 15)));
             l1.setEditable(false);
@@ -101,7 +120,7 @@ public  class Design_Main {
                         JOptionPane.showMessageDialog(frame,"Empty");
                     }else {
                         //Stack Overflow Copied From this section
-                        StringSelection stringSelection = new StringSelection(fbook);
+                        StringSelection stringSelection = new StringSelection(Fn.dec(fbook));
                         Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
                         clpbrd.setContents(stringSelection, null);
                         JOptionPane.showMessageDialog(frame,"Copied!");
@@ -134,7 +153,7 @@ public  class Design_Main {
 
 
 
-        l2 = new JTextField(instra);
+        l2 = new JTextField(DeepEncrpt(instra));
         l2.setBounds(170,194,370,40);
         l2.setBorder(BorderFactory.createCompoundBorder(l2.getBorder(),BorderFactory.createEmptyBorder(5,15, 5, 15)));
         l2.setEditable(false);
@@ -149,7 +168,7 @@ public  class Design_Main {
                     JOptionPane.showMessageDialog(frame,"Empty");
                 }else {
                     //Stack Overflow Copied From this section
-                    StringSelection stringSelection = new StringSelection(instra);
+                    StringSelection stringSelection = new StringSelection(Fn.dec(instra));
                     Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
                     clpbrd.setContents(stringSelection, null);
                     JOptionPane.showMessageDialog(frame,"Copied!");
@@ -176,7 +195,7 @@ public  class Design_Main {
 
 
 
-        l3 = new JTextField(mails);
+        l3 = new JTextField(DeepEncrpt(mails));
         l3.setBounds(170,268,370,40);
         l3.setBorder(BorderFactory.createCompoundBorder(l3.getBorder(),BorderFactory.createEmptyBorder(5,15, 5, 15)));
         l3.setEditable(false);
@@ -191,7 +210,7 @@ public  class Design_Main {
                     JOptionPane.showMessageDialog(frame,"Empty");
                 }else {
                     //Stack Overflow Copied From this section
-                    StringSelection stringSelection = new StringSelection(mails);
+                    StringSelection stringSelection = new StringSelection(Fn.dec(mails));
                     Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
                     clpbrd.setContents(stringSelection, null);
                     JOptionPane.showMessageDialog(frame,"Copied!");
@@ -217,7 +236,7 @@ public  class Design_Main {
 
 
 
-        l4 = new JTextField(twet);
+        l4 = new JTextField(DeepEncrpt(twet));
         l4.setBounds(170,340,370,40);
         l4.setBorder(BorderFactory.createCompoundBorder(l4.getBorder(),BorderFactory.createEmptyBorder(5,15, 5, 15)));
         l4.setEditable(false);
@@ -232,7 +251,7 @@ public  class Design_Main {
                     JOptionPane.showMessageDialog(frame,"Empty");
                 }else {
                     //Stack Overflow Copied From this section
-                    StringSelection stringSelection = new StringSelection(twet);
+                    StringSelection stringSelection = new StringSelection(Fn.dec(twet));
                     Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
                     clpbrd.setContents(stringSelection, null);
                     JOptionPane.showMessageDialog(frame,"Copied!");
@@ -258,7 +277,7 @@ public  class Design_Main {
 
 
 
-        l5 = new JTextField(link1);
+        l5 = new JTextField(DeepEncrpt(link1));
         l5.setBounds(170,415,370,40);
         l5.setBorder(BorderFactory.createCompoundBorder(l5.getBorder(),BorderFactory.createEmptyBorder(5,15, 5, 15)));
         l5.setEditable(false);
@@ -273,7 +292,7 @@ public  class Design_Main {
                     JOptionPane.showMessageDialog(frame,"Empty");
                 }else {
                     //Stack Overflow Copied From this section
-                    StringSelection stringSelection = new StringSelection(link1);
+                    StringSelection stringSelection = new StringSelection(Fn.dec(link1));
                     Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
                     clpbrd.setContents(stringSelection, null);
                     JOptionPane.showMessageDialog(frame,"Copied!");
@@ -298,7 +317,7 @@ public  class Design_Main {
 
 
 
-        l6 = new JTextField(link2);
+        l6 = new JTextField(DeepEncrpt(link2));
         l6.setBounds(170,460,370,40);
         l6.setBorder(BorderFactory.createCompoundBorder(l6.getBorder(),BorderFactory.createEmptyBorder(5,15, 5, 15)));
         l6.setEditable(false);
@@ -312,7 +331,7 @@ public  class Design_Main {
                     JOptionPane.showMessageDialog(frame,"Empty");
                 }else {
                     //Stack Overflow Copied From this section
-                    StringSelection stringSelection = new StringSelection(link2);
+                    StringSelection stringSelection = new StringSelection(Fn.dec(link2));
                     Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
                     clpbrd.setContents(stringSelection, null);
                     JOptionPane.showMessageDialog(frame,"Copied!");

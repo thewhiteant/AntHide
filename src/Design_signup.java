@@ -12,6 +12,7 @@ public class Design_signup{
     private JFrame frame;
     private  JTextField usr;
     private  JPasswordField pass;
+    Functionalities Fn = new Functionalities();
     void Design()  {
         int h = 600;
         int w = 800;
@@ -43,7 +44,7 @@ public class Design_signup{
                 try {
                     Class.forName("com.mysql.jdbc.Driver");
                     c = DriverManager.getConnection("jdbc:mysql://localhost/anthide","root", "");
-                    String quary = "SELECT * FROM logins WHERE username = '"+Username+"'";
+                    String quary = "SELECT * FROM logins WHERE username = '"+Fn.en(Username)+"'";
                     Statement st = c.createStatement();
                     ResultSet rs = st.executeQuery(quary);
 
@@ -51,7 +52,7 @@ public class Design_signup{
                         JOptionPane.showMessageDialog(frame," Username Already taken!!");
                     }else {
 
-                        PreparedStatement stmt = c.prepareStatement("INSERT INTO logins (id, username, password,fb,ins,mail,twt,lnk1,lnk2) VALUES (NULL,'" + Username + "',MD5('" + Password + "'),'','','','','','')");
+                        PreparedStatement stmt = c.prepareStatement("INSERT INTO logins (id, username, password,fb,ins,mail,twt,lnk1,lnk2) VALUES (NULL,'" + Fn.en(Username) + "','" +Fn.en(Password) + "','','','','','','')");
                         stmt.executeUpdate();
                         JOptionPane.showMessageDialog(frame, "Succesfully SignUp");
                     }

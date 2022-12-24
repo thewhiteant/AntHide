@@ -15,7 +15,12 @@ public class Design_Login{
     private JLabel picLabel;
     private  JTextField usr;
     private  JPasswordField pass;
+
+
         void Design()  {
+            //Functionalties
+            Functionalities Fn = new Functionalities();
+
             int h = 600;
             int w = 800;
             frame = new JFrame();
@@ -46,7 +51,7 @@ public class Design_Login{
                     try {
                         Class.forName("com.mysql.jdbc.Driver");
                         c = DriverManager.getConnection("jdbc:mysql://localhost/anthide","root", "");
-                        String quary = "SELECT * FROM logins WHERE username = '"+Username+"' and password = MD5('"+Password+"')";
+                        String quary = "SELECT * FROM logins WHERE username = '"+Fn.en(Username)+"' and password = '"+ Fn.en(Password)+"'";
                         Statement st = c.createStatement();
                         ResultSet rs = st.executeQuery(quary);
 

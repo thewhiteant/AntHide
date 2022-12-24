@@ -10,6 +10,7 @@ public class Editor_Window {
     private JFrame frame;
 
     void  Main(String oldone,String usrername,String data){
+        Functionalities Fn = new Functionalities();
         int h = 240;
         int w = 430;
         frame = new JFrame();
@@ -22,7 +23,7 @@ public class Editor_Window {
         JLabel picLabel = new JLabel(img, JLabel.LEFT);
         picLabel.setBounds(0, -19, w, h);
 
-        JTextField passw = new JTextField(oldone);
+        JTextField passw = new JTextField(Fn.dec(oldone)); //its show encrypted
         passw.setBorder(BorderFactory.createCompoundBorder(passw.getBorder(),BorderFactory.createEmptyBorder(0,15, 0, 15)));
         passw.setBounds(130,90,250,25);
 
@@ -33,11 +34,11 @@ public class Editor_Window {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String passwordforCng = passw.getText();
-                if(oldone !=passwordforCng) {
+                if(oldone !=  passwordforCng) {
                     try {
                        Class.forName("com.mysql.jdbc.Driver");
                        Connection c = DriverManager.getConnection("jdbc:mysql://localhost/anthide","root", "");
-                       PreparedStatement stmt = c.prepareStatement("UPDATE logins SET "+data+" = MD5('"+ passwordforCng +"') WHERE logins . username = '" + usrername + "'");
+                       PreparedStatement stmt = c.prepareStatement("UPDATE logins SET "+data+" = '"+ Fn.en(passwordforCng) +"' WHERE logins . username = '" +Fn.en(usrername) + "'");
                        stmt.executeUpdate();
 
 
@@ -64,7 +65,7 @@ public class Editor_Window {
                 try {
                     Class.forName("com.mysql.jdbc.Driver");
                     Connection c = DriverManager.getConnection("jdbc:mysql://localhost/anthide","root", "");
-                    PreparedStatement stmt = c.prepareStatement("UPDATE logins SET "+data+" = '' WHERE logins . username = '" + usrername + "'");
+                    PreparedStatement stmt = c.prepareStatement("UPDATE logins SET "+data+" = '' WHERE logins . username = '" + Fn.en(usrername) + "'");
                     stmt.executeUpdate();
 
                 } catch (CommunicationsException ex){
