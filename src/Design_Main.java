@@ -1,7 +1,6 @@
 import com.mysql.jdbc.CommunicationsException;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
@@ -36,7 +35,7 @@ public  class Design_Main {
         return  key;
     }
 
-    void Design(String uname) {
+    int Design(String uname) {
         Functionalities Fn = new Functionalities();
 
 
@@ -359,6 +358,7 @@ public  class Design_Main {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
+        return h;
     }
 
 }

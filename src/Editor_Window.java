@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.*;
 
 public class Editor_Window {
@@ -55,7 +57,6 @@ public class Editor_Window {
             }
         });
 
-
         JButton delbtn = new JButton("Delete");
         delbtn.setBackground(new Color(230,233,237));
         delbtn.setBounds(260,130,100,35);
@@ -87,8 +88,16 @@ public class Editor_Window {
         frame.add(picLabel);
         frame.setResizable(false);
         frame.setLayout(null);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//        frame.setDefaultCloseOperation();
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                new Design_Main().Design(usrername);
+            }
+        });
         frame.setVisible(true);
 
     }
 }
+

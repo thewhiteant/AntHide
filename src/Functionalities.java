@@ -17,7 +17,7 @@ public class Functionalities {
     private static SecretKeySpec secretKey;
     private static byte[] key;
     private static final String ALGORITHM = "AES";
-    private  static final String secret = "8QwTJ22xu4QheL4vdmPc0wchKwX5DxzZ";
+    private  static final String secret = "8QwTJ22xu4QheL4vdmPc0wchKwX5DxzZ"; //key
 
     public void prepareSecreteKey(String myKey) {
         MessageDigest sha = null;
