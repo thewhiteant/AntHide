@@ -1,4 +1,5 @@
 import com.mysql.jdbc.CommunicationsException;
+import java.sql.PreparedStatement;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,9 +44,10 @@ public  class Design_Main {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection c = DriverManager.getConnection("jdbc:mysql://localhost/anthide","root", "");
-            String quary = "SELECT * FROM logins WHERE username = '"+ Fn.en(uname)+"'";
-            Statement st = c.createStatement();
-            ResultSet rs = st.executeQuery(quary);
+            String quary = "SELECT * FROM logins WHERE username = ?";
+            PreparedStatement st = c.prepareStatement(quary);
+            st.setString(1, Fn.en(uname));
+            ResultSet rs = st.executeQuery();
             while (rs.next()){
                 fbook = rs.getString("fb"); //Encrypted ones
                 instra = rs.getString("ins");
