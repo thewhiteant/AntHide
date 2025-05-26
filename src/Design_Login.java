@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.sql.PreparedStatement;
 import javax.swing.*;
 public class Design_Login{
 
@@ -51,10 +52,12 @@ public class Design_Login{
                     try {
                         Class.forName("com.mysql.jdbc.Driver");
                         c = DriverManager.getConnection("jdbc:mysql://localhost/anthide","root", "");
-                        String quary = "SELECT * FROM logins WHERE username = '"+Fn.en(Username)+"' and password = '"+ Fn.en(Password)+"'";
-                        Statement st = c.createStatement();
-                        ResultSet rs = st.executeQuery(quary);
+                        String quary = "SELECT * FROM logins WHERE username = ? and password = ?";
+                        PreparedStatement st = c.prepareStatement(quary);
+                        st.setString(1, Fn.en(Username));
 
+                        st.setString(2, Fn.en(Password));
+                        ResultSet rs = st.executeQuery();
                         if(rs.next()){
                             frame.dispose();
                             user = Username;

@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.sql.PreparedStatement;
 import javax.swing.*;
 public class Design_signup{
 
@@ -44,10 +45,11 @@ public class Design_signup{
                 try {
                     Class.forName("com.mysql.jdbc.Driver");
                     c = DriverManager.getConnection("jdbc:mysql://localhost/anthide","root", "");
-                    String quary = "SELECT * FROM logins WHERE username = '"+Fn.en(Username)+"'";
-                    Statement st = c.createStatement();
-                    ResultSet rs = st.executeQuery(quary);
+                    String quary = "SELECT * FROM logins WHERE username = ?";
+                    PreparedStatement st = c.prepareStatement(quary);
+                    st.setString(1, Fn.en(Username));
 
+                    ResultSet rs = st.executeQuery();
                     if(rs.next()){
                         JOptionPane.showMessageDialog(frame," Username Already taken!!");
                     }else {
