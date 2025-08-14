@@ -1,4 +1,5 @@
 import com.mysql.jdbc.CommunicationsException;
+import java.security.SecureRandom;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,7 +27,7 @@ public  class Design_Main {
     String DeepEncrpt(String key){
         if(key.isEmpty()) return  "";
         Functionalities Fn = new Functionalities();
-        Random rand = new Random();
+        Random rand = new SecureRandom();
         int randomNum = rand.nextInt((10 - 1) + 1) + 1;
 
         for (int i = 0;i<randomNum;i++){
